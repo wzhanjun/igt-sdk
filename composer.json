@@ -1,0 +1,18 @@
+{
+    "name": "wzhanjun/igt-sdk",
+    "description": "igetui sdk",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jun",
+            "email": "aaasayok@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Wzhanjun\\Igetui\\Sdk\\": "src"
+        }
+    }
+}
