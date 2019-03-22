@@ -2,9 +2,9 @@
 // error_reporting(0);
 // header("Content-Type: text/html; charset=utf-8");
 
-require 'IGtPush.php';
 require __DIR__ . '/../vendor/autoload.php';
 
+use Wzhanjun\Igetui\Sdk\IGtPush as IGeTui;
 use Wzhanjun\Igetui\Sdk\Igetui\IGtAPNPayload;
 use Wzhanjun\Igetui\Sdk\Igetui\SimpleAlertMsg;
 use Wzhanjun\Igetui\Sdk\IGetui\IGtListMessage;
