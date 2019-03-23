@@ -91,7 +91,7 @@ class IGtNotificationTemplate extends IGtBaseTemplate
         //goto
         $actionChain3 = new ActionChain();
         $actionChain3->set_actionId(10010);
-        $actionChain3->set_type(InnerFiledType::refer);
+        $actionChain3->set_type(ActionChainType::refer);
         $actionChain3->set_next(10030);
 
 
