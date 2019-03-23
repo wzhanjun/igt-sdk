@@ -14,7 +14,7 @@ class InnerFiled extends PBMessage
         $this->values["1"] = "";
         $this->fields["2"] = "PBString";
         $this->values["2"] = "";
-        $this->fields["3"] = "InnerFiled_Type";
+        $this->fields["3"] = "InnerFiledType";
         $this->values["3"] = "";
     }
     function key()

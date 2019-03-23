@@ -21,7 +21,7 @@ class NotifyInfo extends PBMessage
         $this->values["4"] = "";
         $this->fields["5"] = "PBString";
         $this->values["5"] = "";
-        $this->fields["6"] = "NotifyInfo_Type";
+        $this->fields["6"] = "NotifyInfoType";
         $this->values["6"] = "";
         $this->values["6"] = new NotifyInfoType();
         $this->values["6"]->value = NotifyInfoType::_payload;

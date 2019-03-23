@@ -10,7 +10,7 @@ class PushResult extends PBMessage
     public function __construct($reader=null)
     {
         parent::__construct($reader);
-        $this->fields["1"] = "PushResult_EPushResult";
+        $this->fields["1"] = "PushResultEPushResult";
         $this->values["1"] = "";
         $this->fields["2"] = "PBString";
         $this->values["2"] = "";

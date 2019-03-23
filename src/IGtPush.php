@@ -70,6 +70,13 @@ Class IGtPush
         return $this->host;
     }
 
+
+    /**
+     * @param $domainUrlList
+     * @param $appkey
+     * @return null
+     * @throws \Exception
+     */
     public function getOSPushDomainUrlList($domainUrlList,$appkey)
     {
         $urlList = null;
@@ -101,12 +108,14 @@ Class IGtPush
         return $urlList;
     }
 
+
     /**
+     *
      * @param $url
      * @param $data
      * @param bool $gzip
      * @return mixed|null
-     * @throws Sdk\RequestException
+     * @throws RequestException | \Exception
      */
     function httpPostJSON($url,$data,$gzip=false)
     {
@@ -142,6 +151,13 @@ Class IGtPush
         return $rep;
     }
 
+
+    /**
+     *
+     *
+     * @return bool
+     * @throws RequestException |  \Exception
+     */
     public  function connect()
     {
         $timeStamp = $this->micro_time();
@@ -162,25 +178,32 @@ Class IGtPush
             }
             return true;
         }
+
         throw new \Exception("appKey Or masterSecret is Auth Failed");
     }
 
+    /**
+     * @throws RequestException
+     */
     public function close()
     {
         $params = array();
-        $params["action"] = "close";
-        $params["appkey"] = $this->appkey;
-        $params["version"] = GTConfig::getSDKVersion();
+
+        $params["action"]    = "close";
+        $params["appkey"]    = $this->appkey;
+        $params["version"]   = GTConfig::getSDKVersion();
         $params["authtoken"] = $this->authToken;
+
         HttpManager::httpPostJson($this->host,$params,false);
     }
 
     /**
-     *  指定用户推送消息
-     * @param  IGtMessage message
-     * @param  IGtTarget target
-     * @return Array {result:successed_offline,taskId:xxx}  || {result:successed_online,taskId:xxx} || {result:error}
-     ***/
+     * @param $message
+     * @param $target
+     * @param null $requestId
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function pushMessageToSingle($message, $target, $requestId = null)
     {
         if($requestId == null || trim($requestId) == "")
@@ -224,27 +247,34 @@ Class IGtPush
         return $this->getListAppContentId($message,$taskGroupName);
     }
 
+
     /**
-     *  取消消息
-     * @param  String  contentId
-     * @return boolean
-     ***/
+     * @param $contentId
+     * @return bool
+     * @throws RequestException
+     */
     public function cancelContentId($contentId)
     {
         $params = array();
-        $params["action"] = "cancleContentIdAction";
-        $params["appkey"] = $this->appkey;
+
+        $params["action"]    = "cancleContentIdAction";
+        $params["appkey"]    = $this->appkey;
         $params["contentId"] = $contentId;
+
         $rep = $this->httpPostJSON($this->host,$params);
+
         return $rep['result'] == 'ok' ? true : false;
     }
 
+
     /**
      * 用户黑名单接口
-     * @param appId
-     * @param cidList
-     * @param optType 1: 增加黑名单，2：恢复加入黑名单中的cid列表
-     * @return
+     *
+     * @param $appId
+     * @param $cidList
+     * @param $optType 1: 增加黑名单，2：恢复加入黑名单中的cid列表
+     * @return mixed|null
+     * @throws RequestException | \Exception
      */
     private function blackCidList($appId,$cidList,$optType){
         $params = array();
@@ -271,12 +301,16 @@ Class IGtPush
         return $this->blackCidList($appId,$cidList,2);
 
     }
+
+
     /**
-     *  批量推送信息
-     * @param  String contentId
-     * @param  Array <IGtTarget> targetList
-     * @return Array {result:successed_offline,taskId:xxx}  || {result:successed_online,taskId:xxx} || {result:error}
-     ***/
+     * 批量推送信息
+     *
+     * @param $contentId
+     * @param $targetList
+     * @return mixed|null {result:successed_offline,taskId:xxx}  || {result:successed_online,taskId:xxx} || {result:error}
+     * @throws RequestException | \Exception
+     */
     public function pushMessageToList($contentId, $targetList)
     {
         $params = array();
@@ -326,6 +360,11 @@ Class IGtPush
         return $this->httpPostJSON($this->host,$params,true);
     }
 
+    /**
+     * @param $contentId
+     * @return bool
+     * @throws RequestException
+     */
     public function stop($contentId)
     {
         $params = array();
@@ -339,6 +378,12 @@ Class IGtPush
         return false;
     }
 
+    /**
+     * @param $appId
+     * @param $clientId
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function getClientIdStatus($appId, $clientId)
     {
         $params = array();
@@ -349,6 +394,13 @@ Class IGtPush
         return $this->httpPostJSON($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $clientId
+     * @param $tags
+     * @return mixed|null
+     * @throws RequestException
+     */
     public  function setClientTag($appId, $clientId, $tags)
     {
         $params = array();
@@ -360,15 +412,17 @@ Class IGtPush
         return $this->httpPostJSON($this->host, $params);
     }
 
+
     /**
      * 设置 iphone Badge
-     * @param badge
-     * @param appid
-     * @param deviceTokenList
-     * @param cidList
-     * @return
+     *
+     * @param $badge
+     * @param $appid
+     * @param $deviceTokenList
+     * @param $cidList
+     * @return mixed|null
+     * @throws RequestException
      */
-
     private function setBadge($badge,$appid,$deviceTokenList,$cidList){
         $params = array();
         $params["action"] = "setBadgeAction";
@@ -381,17 +435,38 @@ Class IGtPush
 
     }
 
+    /**
+     * @param $badge
+     * @param $appid
+     * @param $cidList
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function setBadgeForCID($badge,$appid,$cidList){
 
         return $this->setBadge($badge,$appid,array(), $cidList);
 
     }
+
+    /**
+     * @param $badge
+     * @param $appid
+     * @param $deviceTokenList
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function setBadgeForDeviceToken($badge,$appid,$deviceTokenList){
 
         return $this->setBadge($badge,$appid,$deviceTokenList, array());
 
     }
 
+    /**
+     * @param $message
+     * @param null $taskGroupName
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function pushMessageToApp($message, $taskGroupName = null)
     {
         $contentId = $this->getListAppContentId($message, $taskGroupName);
@@ -403,6 +478,12 @@ Class IGtPush
         return $this->httpPostJSON($this->host,$params);
     }
 
+    /**
+     * @param $message
+     * @param null $taskGroupName
+     * @return mixed
+     * @throws RequestException | \Exception
+     */
     private function getListAppContentId($message, $taskGroupName = null)
     {
         $params = array();
@@ -458,6 +539,13 @@ Class IGtPush
         return new IGtBatch($this->appkey,$this);
     }
 
+    /**
+     * @param $appId
+     * @param $deviceToken
+     * @param $message
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function pushAPNMessageToSingle($appId, $deviceToken, $message)
     {
         $params = array();
@@ -466,15 +554,19 @@ Class IGtPush
         $params['appkey'] = $this->appkey;
         $params['DT'] = $deviceToken;
         $params['PI'] = base64_encode($message->get_data()->get_pushInfo()->SerializeToString());
+
         return $this->httpPostJSON($this->host,$params);
     }
 
+
     /**
      * 根据deviceTokenList群推
+     *
      * @param $appId
      * @param $contentId
      * @param $deviceTokenList
-     * @return mixed
+     * @return mixed|null
+     * @throws RequestException
      */
     public function pushAPNMessageToList($appId, $contentId, $deviceTokenList)
     {
@@ -488,11 +580,14 @@ Class IGtPush
         $params["needDetails"]=$needDetails;
         return $this->httpPostJSON($this->host,$params);
     }
+
     /**
      * 获取apn contentId
+     *
      * @param $appId
      * @param $message
-     * @return string
+     * @return mixed
+     * @throws RequestException | \Exception
      */
     public function getAPNContentId($appId, $message)
     {
@@ -509,6 +604,13 @@ Class IGtPush
         }
     }
 
+    /**
+     * @param $appId
+     * @param $alias
+     * @param $clientId
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function bindAlias($appId, $alias, $clientId)
     {
         $params = array();
@@ -520,6 +622,13 @@ Class IGtPush
         return $this->httpPostJSON($this->host,$params);
     }
 
+
+    /**
+     * @param $appId
+     * @param $targetList
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function bindAliasBatch($appId, $targetList)
     {
         $params = array();
@@ -537,6 +646,12 @@ Class IGtPush
         return $this->httpPostJSON($this->host,$params);
     }
 
+    /**
+     * @param $appId
+     * @param $alias
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function queryClientId($appId, $alias)
     {
         $params = array();
@@ -547,6 +662,12 @@ Class IGtPush
         return $this->httpPostJSON($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $clientId
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function queryAlias($appId, $clientId)
     {
         $params = array();
@@ -557,6 +678,13 @@ Class IGtPush
         return $this->httpPostJSON($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $alias
+     * @param null $clientId
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function unBindAlias($appId, $alias, $clientId=null)
     {
         $params = array();
@@ -571,11 +699,22 @@ Class IGtPush
         return $this->httpPostJSON($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $alias
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function unBindAliasAll($appId, $alias)
     {
         return $this->unBindAlias($appId, $alias);
     }
 
+    /**
+     * @param $taskId
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function getPushResult( $taskId) {
         $params = array();
         $params["action"] = "getPushMsgResult";
@@ -584,6 +723,12 @@ Class IGtPush
         return $this->httpPostJson($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $groupName
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function getPushResultByGroupName($appId,$groupName){
         $params = array();
         $params["action"] = "getPushResultByGroupName";
@@ -593,6 +738,12 @@ Class IGtPush
         return $this->httpPostJSON($this->host, $params);
     }
 
+
+    /**
+     * @param $appId
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function getLast24HoursOnlineUserStatistics($appId){
         $params = array();
         $params["action"] = "getLast24HoursOnlineUser";
@@ -603,10 +754,22 @@ Class IGtPush
         return $this->httpPostJSON($this->host, $params);
 
     }
+
+    /**
+     * @param $taskIdList
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function getPushResultByTaskidList( $taskIdList) {
         return $this->getPushActionResultByTaskids($taskIdList, null);
     }
 
+    /**
+     * @param $taskIdList
+     * @param $actionIdList
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function getPushActionResultByTaskids( $taskIdList, $actionIdList) {
         $params = array();
         $params["action"] = "getPushMsgResultByTaskidList";
@@ -616,6 +779,12 @@ Class IGtPush
         return $this->httpPostJson($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $clientId
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function getUserTags($appId, $clientId) {
         $params = array();
         $params["action"] = "getUserTags";
@@ -625,6 +794,12 @@ Class IGtPush
         return $this->httpPostJson($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $tagList
+     * @return mixed|null
+     * @throws RequestException | \Exception
+     */
     public function getUserCountByTags($appId, $tagList) {
         $params = array();
         $params["action"] = "getUserCountByTags";
@@ -638,6 +813,11 @@ Class IGtPush
         return $this->httpPostJSON($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function getPersonaTags($appId) {
         $params = array();
         $params["action"] = "getPersonaTags";
@@ -647,6 +827,12 @@ Class IGtPush
         return $this->httpPostJSON($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $date
+     * @return mixed|null
+     * @throws RequestException | \Exception
+     */
     public function queryAppPushDataByDate($appId, $date){
         if(!LangUtils::validateDate($date)){
             throw new \Exception("DateError|".$date);
@@ -659,6 +845,12 @@ Class IGtPush
         return $this->httpPostJson($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $date
+     * @return mixed|null
+     * @throws RequestException |\Exception
+     */
     public function queryAppUserDataByDate($appId, $date){
         if(!LangUtils::validateDate($date)){
             throw new \Exception("DateError|".$date);
@@ -671,6 +863,12 @@ Class IGtPush
         return $this->httpPostJson($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $appConditions
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function queryUserCount($appId, $appConditions) {
         $params = array();
         $params["action"] = "queryUserCount";
@@ -682,6 +880,12 @@ Class IGtPush
         return $this->httpPostJson($this->host, $params);
     }
 
+    /**
+     * @param $message
+     * @param null $requestId
+     * @return array|mixed|null
+     * @throws RequestException
+     */
     public function pushTagMessage($message, $requestId = null) {
         if(!$message instanceof IGtTagMessage) {
             return $this->get_result("MsgTypeError");
@@ -705,9 +909,21 @@ Class IGtPush
         return $this->httpPostJSON($this->host, $params);
     }
 
+    /**
+     * @param $message
+     * @return array|mixed|null
+     * @throws RequestException
+     */
     public function pushTagMessageRetry($message) {
         return $this->pushTagMessage($message,null);
     }
+
+    /**
+     * @param $taskId
+     * @param $appId
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function getScheduleTask($taskId,$appId){
         $params = array();
         $params["action"] = "getScheduleTaskAction";
@@ -719,6 +935,12 @@ Class IGtPush
 
     }
 
+    /**
+     * @param $taskId
+     * @param $appId
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function delScheduleTask($taskId,$appId){
         $params = array();
         $params["action"] = "delScheduleTaskAction";
@@ -730,6 +952,12 @@ Class IGtPush
 
     }
 
+    /**
+     * @param $appId
+     * @param $cidAndPn
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function bindCidPn($appId,$cidAndPn){
         $params = array();
         $params["action"] = "bind_cid_pn";
@@ -740,6 +968,12 @@ Class IGtPush
         return $this->httpPostJSON($this->host,$params);
     }
 
+    /**
+     * @param $appId
+     * @param $cid
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function unbindCidPn($appId,$cid){
         $params = array();
         $params["action"] = "unbind_cid_pn";
@@ -750,6 +984,12 @@ Class IGtPush
         return $this->httpPostJSON($this->host,$params);
     }
 
+    /**
+     * @param $appId
+     * @param $cid
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function queryCidPn($appId,$cid){
         $params = array();
         $params["action"] = "query_cid_pn";
@@ -760,6 +1000,12 @@ Class IGtPush
         return  $this->httpPostJSON($this->host,$params);
     }
 
+    /**
+     * @param $appId
+     * @param $taskId
+     * @return mixed|null
+     * @throws RequestException
+     */
     public function stopSendSms($appId,$taskId){
         $params = array();
         $params["action"] = "stop_sms";
@@ -770,6 +1016,10 @@ Class IGtPush
 
     }
 
+    /**
+     * @param $info
+     * @return array
+     */
     private function get_result($info) {
         $ret = array();
         $ret["result"] = $info;

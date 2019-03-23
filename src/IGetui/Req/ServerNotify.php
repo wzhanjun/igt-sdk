@@ -11,7 +11,7 @@ class ServerNotify extends PBMessage
     public function __construct($reader=null)
     {
         parent::__construct($reader);
-        $this->fields["1"] = "ServerNotify_NotifyType";
+        $this->fields["1"] = "ServerNotifyNotifyType";
         $this->values["1"] = "";
         $this->fields["2"] = "PBString";
         $this->values["2"] = "";
