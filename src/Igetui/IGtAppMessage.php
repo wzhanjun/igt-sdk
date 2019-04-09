@@ -1,6 +1,6 @@
 <?php
 
-namespace Wzhanjun\Igetui\Sdk\IGetui;
+namespace Wzhanjun\Igetui\Sdk\Igetui;
 
 class IGtAppMessage extends IGtMessage{
 
