@@ -2,41 +2,40 @@
 
 namespace Wzhanjun\Igetui\Sdk\Igetui;
 
-class IGtTarget{
+class IGtTarget
+{
+    public $appId;
 
-    var  $appId;
+    public $clientId;
 
-    var $clientId;
-
-    var $alias;
+    public $alias;
 
 
     public function __construct()
     {
-
     }
 
-    function get_appId()
+    public function get_appId()
     {
         return $this->appId;
     }
-    function set_appId($appId)
+    public function set_appId($appId)
     {
         return $this->appId = $appId;
     }
-    function get_clientId()
+    public function get_clientId()
     {
         return $this->clientId;
     }
-    function set_clientId($clientId)
+    public function set_clientId($clientId)
     {
         return $this->clientId = $clientId;
     }
-    function set_alias($alias)
+    public function set_alias($alias)
     {
         return $this->alias = $alias;
     }
-    function get_alias()
+    public function get_alias()
     {
         return $this->alias;
     }

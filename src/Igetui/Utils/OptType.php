@@ -3,7 +3,6 @@
 
 namespace Wzhanjun\Igetui\Sdk\Igetui\Utils;
 
-
 class OptType
 {
     const _OR_ = 0;

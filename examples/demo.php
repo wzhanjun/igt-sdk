@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // error_reporting(0);
 // header("Content-Type: text/html; charset=utf-8");
 
@@ -14,27 +14,26 @@ use Wzhanjun\Igetui\Sdk\Igetui\MediaType;
 use Wzhanjun\Igetui\Sdk\Igetui\Template\Notify\SmsMessage;
 use Wzhanjun\Igetui\Sdk\Igetui\Template\IGtTransmissionTemplate;
 
-
 ////设置代理
 //putenv("gexin_http_proxy_ip=192.168.44.129");
 //putenv("gexin_http_proxy_port=808");
 //putenv("gexin_http_proxy_username=user");
 //putenv("gexin_http_proxy_passwd=123456");
 
-define('APPKEY','z9juM9yK4u66c2zMml1BEA');
-define('APPID','Zg4NFJPtXg5NmcqFdgNNG9');
-define('MASTERSECRET','etAWkUvCsL706FRWuUlg11');
-define('HOST','http://sdk.open.api.igexin.com/apiex.htm');
-define('CID','92ce1a5e91a871f763d2b8274b709053');
-define('DT','');
-define('CID1','');
-define('DT1','');
-define('groupName','');
+define('APPKEY', 'z9juM9yK4u66c2zMml1BEA');
+define('APPID', 'Zg4NFJPtXg5NmcqFdgNNG9');
+define('MASTERSECRET', 'etAWkUvCsL706FRWuUlg11');
+define('HOST', 'http://sdk.open.api.igexin.com/apiex.htm');
+define('CID', '92ce1a5e91a871f763d2b8274b709053');
+define('DT', '');
+define('CID1', '');
+define('DT1', '');
+define('groupName', '');
 
-define('PN','');
-define('Badge','+1');
-define("TASKID","OSA-0731_RGyUZj0gYEAC51o1EgbTz8");
-define("ALIAS","ALIAS");
+define('PN', '');
+define('Badge', '+1');
+define("TASKID", "OSA-0731_RGyUZj0gYEAC51o1EgbTz8");
+define("ALIAS", "ALIAS");
 
 //测试完成
 //getUserStatus();
@@ -67,123 +66,143 @@ pushMessageToSingle();
 //stoptask();
 
 
-function bindAlias() {
+function bindAlias()
+{
     $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
-    $ret =$igt->bindAlias(APPID,ALIAS,CID);
+    $ret =$igt->bindAlias(APPID, ALIAS, CID);
     var_dump($ret);
 }
-function queryCidByAlias() {
+function queryCidByAlias()
+{
     $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
-    $ret =$igt->queryClientId(APPID,ALIAS);
-    var_dump($ret);
-}
-
-function queryAliasByCID() {
-    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
-    $ret =$igt->queryAlias(APPID,CID);
-    var_dump($ret);
-}
-function unbindAlias() {
-    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
-    $ret =$igt->unBindAlias(APPID,ALIAS,CID);
-    var_dump($ret);
-}
-function unbindAliasAll() {
-    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
-    $ret =$igt->unBindAliasAll(APPID,ALIAS);
+    $ret =$igt->queryClientId(APPID, ALIAS);
     var_dump($ret);
 }
 
-function getPersonaTagsDemo() {
+function queryAliasByCID()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
+    $ret =$igt->queryAlias(APPID, CID);
+    var_dump($ret);
+}
+function unbindAlias()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
+    $ret =$igt->unBindAlias(APPID, ALIAS, CID);
+    var_dump($ret);
+}
+function unbindAliasAll()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
+    $ret =$igt->unBindAliasAll(APPID, ALIAS);
+    var_dump($ret);
+}
+
+function getPersonaTagsDemo()
+{
     $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
     $ret = $igt->getPersonaTags(APPID);
     var_dump($ret);
 }
-function getUserCountByTagsDemo() {
-	$igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
+function getUserCountByTagsDemo()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
     $tagList = array("English","龙卷风");
-	$ret = $igt->getUserCountByTags(APPID, $tagList);
-	var_dump($ret);
+    $ret = $igt->getUserCountByTags(APPID, $tagList);
+    var_dump($ret);
 }
 
-function getScheduleTaskDemo(){
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
-    $ret = $igt->getScheduleTask(TASKID,APPID);
+function getScheduleTaskDemo()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
+    $ret = $igt->getScheduleTask(TASKID, APPID);
     var_dump($ret);
 }
-function delScheduleTaskDemo(){
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
-    $ret = $igt->delScheduleTask(TASKID,APPID);
+function delScheduleTaskDemo()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
+    $ret = $igt->delScheduleTask(TASKID, APPID);
     var_dump($ret);
 }
-function getPushResultByGroupNameDemo(){
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
-    $ret = $igt->getPushResultByGroupName(APPID,"toAppPush");
+function getPushResultByGroupNameDemo()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
+    $ret = $igt->getPushResultByGroupName(APPID, "toAppPush");
     var_dump($ret);
 }
-function getLast24HoursOnlineUserStatisticsDemo(){
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
+function getLast24HoursOnlineUserStatisticsDemo()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
     $ret = $igt->getLast24HoursOnlineUserStatistics(APPID);
     var_dump($ret);
 }
-function restoreCidListFromBlkDemo(){
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
+function restoreCidListFromBlkDemo()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
     $cidList=array(CID,"");
-    $ret = $igt->restoreCidListFromBlk(APPID,$cidList);
+    $ret = $igt->restoreCidListFromBlk(APPID, $cidList);
     var_dump($ret);
 }
-function addCidListToBlkDemo(){
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
+function addCidListToBlkDemo()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
     $cidList=array(CID,"");
-    $ret = $igt->addCidListToBlk(APPID,$cidList);
+    $ret = $igt->addCidListToBlk(APPID, $cidList);
     var_dump($ret);
 }
-function setBadgeForCIDDemo(){
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
+function setBadgeForCIDDemo()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
     $cidList=array(CID,CID1);
-    $ret = $igt->setBadgeForCID(Badge,APPID,$cidList);
+    $ret = $igt->setBadgeForCID(Badge, APPID, $cidList);
     var_dump($ret);
 }
-function setBadgeForDeviceTokenDemo(){
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
+function setBadgeForDeviceTokenDemo()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
     $cidList=array(DT,DT1);
-    $ret = $igt->setBadgeForDeviceToken(Badge,APPID,$cidList);
+    $ret = $igt->setBadgeForDeviceToken(Badge, APPID, $cidList);
     var_dump($ret);
 }
 
 //bindCidPnDemo();
-function bindCidPnDemo(){
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
+function bindCidPnDemo()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
     $params = array();
     $params[CID] = md5(PN);
-    $ret = $igt->bindCidPn(APPID,$params);
+    $ret = $igt->bindCidPn(APPID, $params);
     var_dump($ret);
 }
 //unbindCidPnDemo();
-function unbindCidPnDemo(){
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
+function unbindCidPnDemo()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
     $cids=array(CID,"");
-    $ret = $igt->unbindCidPn(APPID,$cids);
+    $ret = $igt->unbindCidPn(APPID, $cids);
     var_dump($ret);
 }
-function queryCidPnDemo(){
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
+function queryCidPnDemo()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
     $cidList=array(CID);
-    $ret = $igt->queryCidPn(APPID,$cidList);
+    $ret = $igt->queryCidPn(APPID, $cidList);
     var_dump($ret);
 }
-function stopSendSmsDemo(){
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
-    $ret = $igt->stopSendSms(APPID,"OSS-0801_4b427ea3eea4801064ac7f76b86da6ab");
+function stopSendSmsDemo()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
+    $ret = $igt->stopSendSms(APPID, "OSS-0801_4b427ea3eea4801064ac7f76b86da6ab");
     var_dump($ret);
 }
 
 
-function getPushMessageResultDemo(){
+function getPushMessageResultDemo()
+{
 
 //    putenv("gexin_default_domainurl=http://183.129.161.174:8006/apiex.htm");
 
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
 
 //    $ret = $igt->getPushResult("OSA-0522_QZ7nHpBlxF6vrxGaLb1FA3");
 //    var_dump($ret);
@@ -191,40 +210,44 @@ function getPushMessageResultDemo(){
 //    $ret = $igt->queryAppUserDataByDate(APPID,"20140807");
 //    var_dump($ret);
 
-    $ret = $igt->queryAppPushDataByDate(APPID,"20180724");
+    $ret = $igt->queryAppPushDataByDate(APPID, "20180724");
     var_dump($ret);
 }
 
 //用户状态查询
-function getUserStatus() {
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
-    $rep = $igt->getClientIdStatus(APPID,CID);
+function getUserStatus()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
+    $rep = $igt->getClientIdStatus(APPID, CID);
     var_dump($rep);
-    echo ("<br><br>");
+    echo("<br><br>");
 }
 
 //推送任务停止
-function stoptask(){
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
+function stoptask()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
     $rep = $igt->stop("OSA-0801_F3TKsUx10wAzfyPsq8zKY2");
     var_dump($rep);
 }
 
 //通过服务端设置ClientId的标签
-function setTag(){
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
+function setTag()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
     $tagList = array('','中文','English');
-    $rep = $igt->setClientTag(APPID,CID,$tagList);
+    $rep = $igt->setClientTag(APPID, CID, $tagList);
     var_dump($rep);
-    echo ("<br><br>");
+    echo("<br><br>");
 }
 
-function getUserTags() {
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
-    $rep = $igt->getUserTags(APPID,CID);
+function getUserTags()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
+    $rep = $igt->getUserTags(APPID, CID);
     //$rep.connect();
     var_dump($rep);
-    echo ("<br><br>");
+    echo("<br><br>");
 }
 
 //服务端推送接口，支持三个接口推送
@@ -233,8 +256,9 @@ function getUserTags() {
 //3.pushMessageToApp接口：对单个应用下的所有用户进行推送，可根据省份，标签，机型过滤推送
 //
 //单推接口案例
-function pushMessageToSingle(){
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
+function pushMessageToSingle()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
 
     //消息模版：
     // 1.TransmissionTemplate:透传功能模板
@@ -263,18 +287,17 @@ function pushMessageToSingle(){
     try {
         $rep = $igt->pushMessageToSingle($message, $target);
         var_dump($rep);
-        echo ("<br><br>");
-
-    }catch(\Wzhanjun\Igetui\Sdk\RequestException $e){
+        echo("<br><br>");
+    } catch (\Wzhanjun\Igetui\Sdk\RequestException $e) {
         $requstId =$e->getRequestId();
-        $rep = $igt->pushMessageToSingle($message, $target,$requstId);
+        $rep = $igt->pushMessageToSingle($message, $target, $requstId);
         var_dump($rep);
-        echo ("<br><br>");
+        echo("<br><br>");
     }
-
 }
 
-function SmsDemo(){
+function SmsDemo()
+{
     $template =  new IGtTransmissionTemplate();
     $template->set_appId(APPID);//应用appid
     $template->set_appkey(APPKEY);//应用appkey
@@ -337,14 +360,13 @@ function pushMessageToSingleBatch()
     $targetNoti->set_clientId(CID2);
     $batch->add($messageNoti, $targetNoti);
     try {
-
         $rep = $batch->submit();
         var_dump($rep);
         echo("<br><br>");
-    }catch(Exception $e){
+    } catch (Exception $e) {
         $rep=$batch->retry();
         var_dump($rep);
-        echo ("<br><br>");
+        echo("<br><br>");
     }
 }
 
@@ -373,7 +395,7 @@ function pushMessageToList()
     $message->set_data($template);//设置推送消息类型
 //    $message->set_PushNetWorkType(1);	//设置是否根据WIFI推送消息，1为wifi推送，0为不限制推送
 //    $contentId = $igt->getContentId($message);
-    $contentId = $igt->getContentId($message,"toList任务别名功能");	//根据TaskId设置组名，支持下划线，中文，英文，数字
+    $contentId = $igt->getContentId($message, "toList任务别名功能");	//根据TaskId设置组名，支持下划线，中文，英文，数字
 
     //接收方1
     $target1 = new IGtTarget();
@@ -387,13 +409,13 @@ function pushMessageToList()
 
     var_dump($rep);
 
-    echo ("<br><br>");
-
+    echo("<br><br>");
 }
 
 //群推接口案例
-function pushMessageToApp(){
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
+function pushMessageToApp()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
     $template = IGtLinkTemplateDemo();
     //个推信息体
     //基于应用消息体
@@ -421,13 +443,14 @@ function pushMessageToApp(){
     $rep = $igt->pushMessageToApp($message);
 
     var_dump($rep);
-    echo ("<br><br>");
+    echo("<br><br>");
 }
 
 //所有推送接口均支持四个消息模板，依次为通知弹框下载模板，通知链接模板，通知透传模板，透传模板
 //注：IOS离线推送需通过APN进行转发，需填写pushInfo字段，目前仅不支持通知弹框下载功能
 
-function IGtNotyPopLoadTemplateDemo(){
+function IGtNotyPopLoadTemplateDemo()
+{
     $template =  new IGtNotyPopLoadTemplate();
 
     $template ->set_appId(APPID);//应用appid
@@ -451,13 +474,14 @@ function IGtNotyPopLoadTemplateDemo(){
     $template ->set_loadUrl("http://dizhensubao.igexin.com/dl/com.ceic.apk");
     $template ->set_isAutoInstall(false);
     $template ->set_isActived(true);
-	//$template->set_notifyStyle(0);
+    //$template->set_notifyStyle(0);
     //$template->set_duration(BEGINTIME,ENDTIME); //设置ANDROID客户端在此时间区间内展示消息
 
     return $template;
 }
 
-function IGtLinkTemplateDemo(){
+function IGtLinkTemplateDemo()
+{
     $template =  new IGtLinkTemplate();
     $template ->set_appId(APPID);//应用appid
     $template ->set_appkey(APPKEY);//应用appkey
@@ -472,7 +496,8 @@ function IGtLinkTemplateDemo(){
     return $template;
 }
 
-function IGtNotificationTemplateDemo(){
+function IGtNotificationTemplateDemo()
+{
     $template =  new IGtNotificationTemplate();
     $template->set_appId(APPID);//应用appid
     $template->set_appkey(APPKEY);//应用appkey
@@ -488,7 +513,8 @@ function IGtNotificationTemplateDemo(){
     return $template;
 }
 
-function IGtTransmissionTemplateDemo(){
+function IGtTransmissionTemplateDemo()
+{
     $template =  new IGtTransmissionTemplate();
     $template->set_appId(APPID);//应用appid
     $template->set_appkey(APPKEY);//应用appkey
@@ -502,7 +528,7 @@ function IGtTransmissionTemplateDemo(){
     $apn->alertMsg=$alertmsg;
     $apn->badge=2;
     $apn->sound="";
-    $apn->add_customMsg("payload","payload");
+    $apn->add_customMsg("payload", "payload");
     $apn->contentAvailable=1;
     $apn->category="ACTIONABLE";
     $template->set_apnInfo($apn);
@@ -515,7 +541,7 @@ function IGtTransmissionTemplateDemo(){
 
     //第三方厂商推送透传消息带通知处理
 //    $notify = new IGtNotify();
-////    $notify -> set_payload("透传测试内容");
+    ////    $notify -> set_payload("透传测试内    容");
 //    $notify -> set_title("透传通知标题");
 //    $notify -> set_content("透传通知内容");
 //    $notify->set_url("https://www.baidu.com");
@@ -538,11 +564,11 @@ function IGtTransmissionTemplateDemo(){
     $apn->alertMsg=$alertmsg;
     $apn->badge=7;
     $apn->sound="";
-    $apn->add_customMsg("payload","payload");
+    $apn->add_customMsg("payload", "payload");
     $apn->contentAvailable=1;
     $apn->category="ACTIONABLE";
 //
-////    IOS多媒体消息处理
+    ////    IOS多媒体消息处理
     $media = new IGtMultiMedia();
     $media -> set_url("http://docs.getui.com/start/img/pushapp_android.png");
     $media -> set_onlywifi(false);
@@ -555,8 +581,9 @@ function IGtTransmissionTemplateDemo(){
 }
 
 //多标签推送接口案例
-function pushMessageByTag(){
-    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
+function pushMessageByTag()
+{
+    $igt = new IGeTui(HOST, APPKEY, MASTERSECRET);
     $template = IGtLinkTemplateDemo();
     //个推信息体
     //基于应用消息体
@@ -573,10 +600,11 @@ function pushMessageByTag(){
     $rep = $igt->pushTagMessage($message);
 
     var_dump($rep);
-    echo ("<br><br>");
+    echo("<br><br>");
 }
 
-function IGtTransmissionTemplateFunction(){
+function IGtTransmissionTemplateFunction()
+{
     $template =  new IGtTransmissionTemplate();
     $template->set_appId('qmLGUim5KR76RY5us9og16');//应用appid
     $template->set_appkey('3qxvCArI7iAGFf4ZEyzqu8');//应用appkey

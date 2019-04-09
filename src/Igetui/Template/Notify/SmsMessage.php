@@ -2,21 +2,21 @@
 
 namespace Wzhanjun\Igetui\Sdk\Igetui\Template\Notify;
 
-class SmsMessage {
-
-    var $smsTemplateId;
+class SmsMessage
+{
+    public $smsTemplateId;
     /**
      * 短信填充
      */
-    var $smsContent;
+    public $smsContent;
     /**
      * 离线多久后进行消息补发
      */
-    var $offlineSendtime;
+    public $offlineSendtime;
 
-    var $url;//Applink路径
-    var $isApplink;
-    var $payload;
+    public $url;//Applink路径
+    public $isApplink;
+    public $payload;
 
     /**
      * @return mixed
@@ -114,5 +114,4 @@ class SmsMessage {
     {
         $this->payload = $payload;
     }
-
 }

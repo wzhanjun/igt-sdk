@@ -6,7 +6,7 @@ use Wzhanjun\Igetui\Sdk\Protobuf\PBMessage;
 
 class NotifyInfo extends PBMessage
 {
-    var $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;
+    public $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;
 
     public function __construct($reader=null)
     {
@@ -28,59 +28,59 @@ class NotifyInfo extends PBMessage
         $this->fields["7"] = "PBString";
         $this->values["7"] = "";
     }
-    function title()
+    public function title()
     {
         return $this->_get_value("1");
     }
-    function set_title($value)
+    public function set_title($value)
     {
         return $this->_set_value("1", $value);
     }
-    function content()
+    public function content()
     {
         return $this->_get_value("2");
     }
-    function set_content($value)
+    public function set_content($value)
     {
         return $this->_set_value("2", $value);
     }
-    function payload()
+    public function payload()
     {
         return $this->_get_value("3");
     }
-    function set_payload($value)
+    public function set_payload($value)
     {
         return $this->_set_value("3", $value);
     }
-    function intent()
+    public function intent()
     {
         return $this->_get_value("4");
     }
-    function set_intent($value)
+    public function set_intent($value)
     {
         return $this->_set_value("4", $value);
     }
-    function url()
+    public function url()
     {
         return $this->_get_value("5");
     }
-    function set_url($value)
+    public function set_url($value)
     {
         return $this->_set_value("5", $value);
     }
-    function type()
+    public function type()
     {
         return $this->_get_value("6");
     }
-    function set_type($value)
+    public function set_type($value)
     {
         return $this->_set_value("6", $value);
     }
-    function notifyId()
+    public function notifyId()
     {
         return $this->_get_value("7");
     }
-    function set_notifyId($value)
+    public function set_notifyId($value)
     {
         return $this->_set_value("7", $value);
     }

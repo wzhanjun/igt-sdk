@@ -4,8 +4,7 @@ namespace Wzhanjun\Igetui\Sdk;
 
 class RequestException extends \Exception
 {
-
-    var $requestId;
+    public $requestId;
 
     public function __construct($requestId, $message, $e)
     {
@@ -17,5 +16,4 @@ class RequestException extends \Exception
     {
         return $this->requestId;
     }
-
 }

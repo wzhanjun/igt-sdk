@@ -6,7 +6,7 @@ use Wzhanjun\Igetui\Sdk\Protobuf\PBMessage;
 
 class Button extends PBMessage
 {
-    var $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;
+    public $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;
     public function __construct($reader=null)
     {
         parent::__construct($reader);
@@ -15,19 +15,19 @@ class Button extends PBMessage
         $this->fields["2"] = "PBInt";
         $this->values["2"] = "";
     }
-    function text()
+    public function text()
     {
         return $this->_get_value("1");
     }
-    function set_text($value)
+    public function set_text($value)
     {
         return $this->_set_value("1", $value);
     }
-    function next()
+    public function next()
     {
         return $this->_get_value("2");
     }
-    function set_next($value)
+    public function set_next($value)
     {
         return $this->_set_value("2", $value);
     }

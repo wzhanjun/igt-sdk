@@ -7,7 +7,7 @@ use Wzhanjun\Igetui\Sdk\Protobuf\Type\PBBool;
 
 class SmsInfo extends PBMessage
 {
-    var $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;
+    public $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;
     public function __construct($reader=null)
     {
         parent::__construct($reader);
@@ -26,63 +26,63 @@ class SmsInfo extends PBMessage
         $this->fields["6"] = "PBString";
         $this->values["6"] = "";
     }
-    function smsTemplateId()
+    public function smsTemplateId()
     {
         return $this->_get_value("1");
     }
-    function set_smsTemplateId($value)
+    public function set_smsTemplateId($value)
     {
         return $this->_set_value("1", $value);
     }
-    function smsContent($offset)
+    public function smsContent($offset)
     {
         return $this->_get_arr_value("2", $offset);
     }
-    function add_smsContent()
+    public function add_smsContent()
     {
         return $this->_add_arr_value("2");
     }
-    function set_smsContent($index, $value)
+    public function set_smsContent($index, $value)
     {
         $this->_set_arr_value("2", $index, $value);
     }
-    function remove_last_smsContent()
+    public function remove_last_smsContent()
     {
         $this->_remove_last_arr_value("2");
     }
-    function smsContent_size()
+    public function smsContent_size()
     {
         return $this->_get_arr_size("2");
     }
-    function offlineSendtime()
+    public function offlineSendtime()
     {
         return $this->_get_value("3");
     }
-    function set_offlineSendtime($value)
+    public function set_offlineSendtime($value)
     {
         return $this->_set_value("3", $value);
     }
-    function smsSendDuration()
+    public function smsSendDuration()
     {
         return $this->_get_value("4");
     }
-    function set_smsSendDuration($value)
+    public function set_smsSendDuration($value)
     {
         return $this->_set_value("4", $value);
     }
-    function smsChecked()
+    public function smsChecked()
     {
         return $this->_get_value("5");
     }
-    function set_smsChecked($value)
+    public function set_smsChecked($value)
     {
         return $this->_set_value("5", $value);
     }
-    function smsCheckedErrorMsg()
+    public function smsCheckedErrorMsg()
     {
         return $this->_get_value("6");
     }
-    function set_smsCheckedErrorMsg($value)
+    public function set_smsCheckedErrorMsg($value)
     {
         return $this->_set_value("6", $value);
     }

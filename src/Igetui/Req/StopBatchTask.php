@@ -6,7 +6,7 @@ use Wzhanjun\Igetui\Sdk\Protobuf\PBMessage;
 
 class StopBatchTask extends PBMessage
 {
-    var $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;
+    public $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;
 
     public function __construct($reader=null)
     {
@@ -20,35 +20,35 @@ class StopBatchTask extends PBMessage
         $this->fields["4"] = "PBString";
         $this->values["4"] = "";
     }
-    function taskId()
+    public function taskId()
     {
         return $this->_get_value("1");
     }
-    function set_taskId($value)
+    public function set_taskId($value)
     {
         return $this->_set_value("1", $value);
     }
-    function appkey()
+    public function appkey()
     {
         return $this->_get_value("2");
     }
-    function set_appkey($value)
+    public function set_appkey($value)
     {
         return $this->_set_value("2", $value);
     }
-    function appId()
+    public function appId()
     {
         return $this->_get_value("3");
     }
-    function set_appId($value)
+    public function set_appId($value)
     {
         return $this->_set_value("3", $value);
     }
-    function seqId()
+    public function seqId()
     {
         return $this->_get_value("4");
     }
-    function set_seqId($value)
+    public function set_seqId($value)
     {
         return $this->_set_value("4", $value);
     }

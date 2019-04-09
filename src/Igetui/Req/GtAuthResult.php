@@ -6,7 +6,7 @@ use Wzhanjun\Igetui\Sdk\Protobuf\PBMessage;
 
 class GtAuthResult extends PBMessage
 {
-    var $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;
+    public $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;
 
     public function __construct($reader=null)
     {
@@ -22,61 +22,60 @@ class GtAuthResult extends PBMessage
         $this->fields["5"] = "PBString";
         $this->values["5"] = array();
     }
-    function code()
+    public function code()
     {
         return $this->_get_value("1");
     }
-    function set_code($value)
+    public function set_code($value)
     {
         return $this->_set_value("1", $value);
     }
-    function redirectAddress()
+    public function redirectAddress()
     {
         return $this->_get_value("2");
     }
-    function set_redirectAddress($value)
+    public function set_redirectAddress($value)
     {
         return $this->_set_value("2", $value);
     }
-    function seqId()
+    public function seqId()
     {
         return $this->_get_value("3");
     }
-    function set_seqId($value)
+    public function set_seqId($value)
     {
         return $this->_set_value("3", $value);
     }
-    function info()
+    public function info()
     {
         return $this->_get_value("4");
     }
-    function set_info($value)
+    public function set_info($value)
     {
         return $this->_set_value("4", $value);
     }
-    function appid($offset)
+    public function appid($offset)
     {
         $v = $this->_get_arr_value("5", $offset);
         return $v->get_value();
     }
-    function append_appid($value)
+    public function append_appid($value)
     {
         $v = $this->_add_arr_value("5");
         $v->set_value($value);
     }
-    function set_appid($index, $value)
+    public function set_appid($index, $value)
     {
         $v = new $this->fields["5"]();
         $v->set_value($value);
         $this->_set_arr_value("5", $index, $v);
     }
-    function remove_last_appid()
+    public function remove_last_appid()
     {
         $this->_remove_last_arr_value("5");
     }
-    function appid_size()
+    public function appid_size()
     {
         return $this->_get_arr_size("5");
     }
-
 }

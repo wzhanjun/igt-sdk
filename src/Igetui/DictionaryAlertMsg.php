@@ -2,22 +2,22 @@
 
 namespace Wzhanjun\Igetui\Sdk\Igetui;
 
-class DictionaryAlertMsg implements ApnMsg{
+class DictionaryAlertMsg implements ApnMsg
+{
+    public $title;
+    public $body;
+    public $titleLocKey;
+    public $titleLocArgs = array();
+    public $actionLocKey;
+    public $locKey;
+    public $locArgs = array();
+    public $launchImage;
+    public $subtitle;
+    public $subtitleLocKey;
+    public $subtitleLocArgs;
 
-    var $title;
-    var $body;
-    var $titleLocKey;
-    var $titleLocArgs = array();
-    var $actionLocKey;
-    var $locKey;
-    var $locArgs = array();
-    var $launchImage;
-    var $subtitle;
-    var $subtitleLocKey;
-    var $subtitleLocArgs;
-
-    public function get_alertMsg() {
-
+    public function get_alertMsg()
+    {
         $alertMap = array();
 
         if ($this->title != null && $this->title != "") {
@@ -45,8 +45,7 @@ class DictionaryAlertMsg implements ApnMsg{
             $alertMap["launch-image"] = $this->launchImage;
         }
 
-        if(count($alertMap) == 0)
-        {
+        if (count($alertMap) == 0) {
             return null;
         }
 

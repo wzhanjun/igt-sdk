@@ -4,7 +4,7 @@ namespace Wzhanjun\Igetui\Sdk\Protobuf\Reader;
 
 class PBInputStringReader extends PBInputReader
 {
-    var $length = 0;
+    public $length = 0;
 
     public function __construct($string)
     {
@@ -20,10 +20,8 @@ class PBInputStringReader extends PBInputReader
     public function next($is_string = false)
     {
         $package = '';
-        while (true)
-        {
-            if ($this->pointer >= $this->length)
-            {
+        while (true) {
+            if ($this->pointer >= $this->length) {
                 return false;
             }
 
@@ -31,18 +29,16 @@ class PBInputStringReader extends PBInputReader
             $string = $this->string[$this->pointer];
             $this->pointer++;
 
-            if ($is_string == true)
+            if ($is_string == true) {
                 return ord($string);
+            }
 
             $value = decbin(ord($string));
 
-            if ($value >= 10000000 && $is_string == false)
-            {
+            if ($value >= 10000000 && $is_string == false) {
                 // now fill to eight with 00
                 $package .= $value;
-            }
-            else
-            {
+            } else {
                 // now fill to length of eight with 0
                 $value = substr('00000000', 0, 8 - strlen($value) % 8) . $value;
                 return $this->base128->get_value($package . $value);

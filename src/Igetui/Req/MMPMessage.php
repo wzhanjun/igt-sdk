@@ -7,7 +7,7 @@ use Wzhanjun\Igetui\Sdk\Protobuf\Type\PBBool;
 
 class MMPMessage extends PBMessage
 {
-    var $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;
+    public $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;
 
     public function __construct($reader=null)
     {
@@ -35,75 +35,75 @@ class MMPMessage extends PBMessage
         $this->values["10"] = new PBBool();
         $this->values["10"]->value = true;
     }
-    function transparent()
+    public function transparent()
     {
         return $this->_get_value("2");
     }
-    function set_transparent($value)
+    public function set_transparent($value)
     {
         return $this->_set_value("2", $value);
     }
-    function extraData()
+    public function extraData()
     {
         return $this->_get_value("3");
     }
-    function set_extraData($value)
+    public function set_extraData($value)
     {
         return $this->_set_value("3", $value);
     }
-    function msgType()
+    public function msgType()
     {
         return $this->_get_value("4");
     }
-    function set_msgType($value)
+    public function set_msgType($value)
     {
         return $this->_set_value("4", $value);
     }
-    function msgTraceFlag()
+    public function msgTraceFlag()
     {
         return $this->_get_value("5");
     }
-    function set_msgTraceFlag($value)
+    public function set_msgTraceFlag($value)
     {
         return $this->_set_value("5", $value);
     }
-    function msgOfflineExpire()
+    public function msgOfflineExpire()
     {
         return $this->_get_value("6");
     }
-    function set_msgOfflineExpire($value)
+    public function set_msgOfflineExpire($value)
     {
         return $this->_set_value("6", $value);
     }
-    function isOffline()
+    public function isOffline()
     {
         return $this->_get_value("7");
     }
-    function set_isOffline($value)
+    public function set_isOffline($value)
     {
         return $this->_set_value("7", $value);
     }
-    function priority()
+    public function priority()
     {
         return $this->_get_value("8");
     }
-    function set_priority($value)
+    public function set_priority($value)
     {
         return $this->_set_value("8", $value);
     }
-    function cdnUrl()
+    public function cdnUrl()
     {
         return $this->_get_value("9");
     }
-    function set_cdnUrl($value)
+    public function set_cdnUrl($value)
     {
         return $this->_set_value("9", $value);
     }
-    function isSync()
+    public function isSync()
     {
         return $this->_get_value("10");
     }
-    function set_isSync($value)
+    public function set_isSync($value)
     {
         return $this->_set_value("10", $value);
     }

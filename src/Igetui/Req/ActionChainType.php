@@ -6,7 +6,6 @@ use Wzhanjun\Igetui\Sdk\Protobuf\Type\PBEnum;
 
 class ActionChainType extends PBEnum
 {
-
     const refer  = 0;
     const notification  = 1;
     const popup  = 2;
@@ -30,5 +29,4 @@ class ActionChainType extends PBEnum
     const enablelog  = 20;
     const disablelog  = 21;
     const uploadlog  = 22;
-
 }

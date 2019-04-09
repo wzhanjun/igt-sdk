@@ -7,7 +7,7 @@ use Wzhanjun\Igetui\Sdk\Protobuf\PBMessage;
 
 class PushMMPSingleMessage extends PBMessage
 {
-    var $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;
+    public $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;
 
     public function __construct($reader=null)
     {
@@ -21,35 +21,35 @@ class PushMMPSingleMessage extends PBMessage
         $this->fields["4"] = "PBString";
         $this->values["4"] = "";
     }
-    function seqId()
+    public function seqId()
     {
         return $this->_get_value("1");
     }
-    function set_seqId($value)
+    public function set_seqId($value)
     {
         return $this->_set_value("1", $value);
     }
-    function message()
+    public function message()
     {
         return $this->_get_value("2");
     }
-    function set_message($value)
+    public function set_message($value)
     {
         return $this->_set_value("2", $value);
     }
-    function target()
+    public function target()
     {
         return $this->_get_value("3");
     }
-    function set_target($value)
+    public function set_target($value)
     {
         return $this->_set_value("3", $value);
     }
-    function requestId()
+    public function requestId()
     {
         return $this->_get_value("4");
     }
-    function set_requestId($value)
+    public function set_requestId($value)
     {
         return $this->_set_value("4", $value);
     }

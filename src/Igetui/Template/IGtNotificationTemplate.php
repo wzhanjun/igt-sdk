@@ -10,20 +10,20 @@ use Wzhanjun\Igetui\Sdk\Igetui\Req\InnerFiledType;
 
 class IGtNotificationTemplate extends IGtBaseTemplate
 {
-    var $text;
-    var $title;
-    var $logo;
-    var $logoURL;
-    var $transmissionType;
-    var $transmissionContent;
-    var $isRing;
-    var $isVibrate;
-    var $isClearable;
-    var $notifyStyle = 0;
+    public $text;
+    public $title;
+    public $logo;
+    public $logoURL;
+    public $transmissionType;
+    public $transmissionContent;
+    public $isRing;
+    public $isVibrate;
+    public $isClearable;
+    public $notifyStyle = 0;
 
 
-    public function  getActionChain() {
-
+    public function getActionChain()
+    {
         $actionChains = array();
 
         // 设置actionChain
@@ -42,49 +42,49 @@ class IGtNotificationTemplate extends IGtBaseTemplate
         $f_text->set_key("text");
         $f_text->set_val($this->text);
         $f_text->set_type(InnerFiledType::str);
-        $actionChain2->set_field(0,$f_text);
+        $actionChain2->set_field(0, $f_text);
 
         $f_title = new InnerFiled();
         $f_title->set_key("title");
         $f_title->set_val($this->title);
         $f_title->set_type(InnerFiledType::str);
-        $actionChain2->set_field(1,$f_title);
+        $actionChain2->set_field(1, $f_title);
 
         $f_logo = new InnerFiled();
         $f_logo->set_key("logo");
         $f_logo->set_val($this->logo);
         $f_logo->set_type(InnerFiledType::str);
-        $actionChain2->set_field(2,$f_logo);
+        $actionChain2->set_field(2, $f_logo);
 
         $f_logoURL = new InnerFiled();
         $f_logoURL->set_key("logo_url");
         $f_logoURL->set_val($this->logoURL);
         $f_logoURL->set_type(InnerFiledType::str);
-        $actionChain2->set_field(3,$f_logoURL);
+        $actionChain2->set_field(3, $f_logoURL);
 
         $f_notifyStyle = new InnerFiled();
         $f_notifyStyle->set_key("notifyStyle");
         $f_notifyStyle->set_val(strval($this->notifyStyle));
         $f_notifyStyle->set_type(InnerFiledType::str);
-        $actionChain2->set_field(4,$f_notifyStyle);
+        $actionChain2->set_field(4, $f_notifyStyle);
 
         $f_isRing = new InnerFiled();
         $f_isRing->set_key("is_noring");
         $f_isRing->set_val(!$this->isRing ? "true" : "false");
         $f_isRing->set_type(InnerFiledType::bool);
-        $actionChain2->set_field(5,$f_isRing);
+        $actionChain2->set_field(5, $f_isRing);
 
         $f_isVibrate = new InnerFiled();
         $f_isVibrate->set_key("is_novibrate");
         $f_isVibrate->set_val(!$this->isVibrate ? "true" : "false");
         $f_isVibrate->set_type(InnerFiledType::bool);
-        $actionChain2->set_field(6,$f_isVibrate);
+        $actionChain2->set_field(6, $f_isVibrate);
 
         $f_isClearable = new InnerFiled();
         $f_isClearable->set_key("is_noclear");
         $f_isClearable->set_val(!$this->isClearable ? "true" : "false");
         $f_isClearable->set_type(InnerFiledType::bool);
-        $actionChain2->set_field(7,$f_isClearable);
+        $actionChain2->set_field(7, $f_isClearable);
 
         $actionChain2->set_next(10010);
 
@@ -117,61 +117,72 @@ class IGtNotificationTemplate extends IGtBaseTemplate
         $actionChain5->set_actionId(100);
         $actionChain5->set_type(ActionChainType::eoa);
 
-        array_push($actionChains, $actionChain1,$actionChain2,$actionChain3,$actionChain4,$actionChain5);
+        array_push($actionChains, $actionChain1, $actionChain2, $actionChain3, $actionChain4, $actionChain5);
 
         return $actionChains;
     }
 
-    function  get_transmissionContent() {
+    public function get_transmissionContent()
+    {
         return $this->transmissionContent;
     }
 
-    function  get_pushType() {
+    public function get_pushType()
+    {
         return 'NotifyMsg';
     }
 
-    function  set_text($text) {
+    public function set_text($text)
+    {
         $this->text = $text;
     }
 
-    function  set_title($title) {
+    public function set_title($title)
+    {
         $this->title = $title;
     }
 
-    function  set_logo($logo) {
+    public function set_logo($logo)
+    {
         $this->logo = $logo;
     }
 
-    function  set_logoURL($logoURL) {
+    public function set_logoURL($logoURL)
+    {
         $this->logoURL = $logoURL;
     }
 
-    function  set_transmissionType($transmissionType) {
+    public function set_transmissionType($transmissionType)
+    {
         $this->transmissionType = $transmissionType;
     }
 
-    function  set_isRing($isRing) {
+    public function set_isRing($isRing)
+    {
         $this->isRing = $isRing;
     }
 
-    function  set_isVibrate($isVibrate) {
+    public function set_isVibrate($isVibrate)
+    {
         $this->isVibrate = $isVibrate;
     }
 
-    function  set_isClearable($isClearable) {
+    public function set_isClearable($isClearable)
+    {
         $this->isClearable = $isClearable;
     }
 
-    function  set_transmissionContent($transmissionContent) {
+    public function set_transmissionContent($transmissionContent)
+    {
         $this->transmissionContent = $transmissionContent;
     }
 
-    function  set_notifyStyle($notifyStyle) {
-        if($notifyStyle != 1){
+    public function set_notifyStyle($notifyStyle)
+    {
+        if ($notifyStyle != 1) {
             $this->notifyStyle = 0;
         } else {
             $this->notifyStyle = 1;
         }
     }
-
 }

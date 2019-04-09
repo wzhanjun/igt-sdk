@@ -6,7 +6,7 @@ use Wzhanjun\Igetui\Sdk\Protobuf\PBMessage;
 
 class AppStartUp extends PBMessage
 {
-    var $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;
+    public $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;
 
     public function __construct($reader=null)
     {
@@ -18,27 +18,27 @@ class AppStartUp extends PBMessage
         $this->fields["3"] = "PBString";
         $this->values["3"] = "";
     }
-    function android()
+    public function android()
     {
         return $this->_get_value("1");
     }
-    function set_android($value)
+    public function set_android($value)
     {
         return $this->_set_value("1", $value);
     }
-    function symbia()
+    public function symbia()
     {
         return $this->_get_value("2");
     }
-    function set_symbia($value)
+    public function set_symbia($value)
     {
         return $this->_set_value("2", $value);
     }
-    function ios()
+    public function ios()
     {
         return $this->_get_value("3");
     }
-    function set_ios($value)
+    public function set_ios($value)
     {
         return $this->_set_value("3", $value);
     }

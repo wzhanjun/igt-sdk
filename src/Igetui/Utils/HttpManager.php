@@ -6,11 +6,11 @@ use Wzhanjun\Igetui\Sdk\RequestException;
 
 class HttpManager
 {
-    static $curls = array();
+    public static $curls = array();
 
     private static function httpPost($url, $data, $gzip, $action)
     {
-        if(!isset(HttpManager::$curls[$url])){
+        if (!isset(HttpManager::$curls[$url])) {
             $curl = curl_init($url);
             HttpManager::$curls[$url] = $curl;
         }
@@ -29,15 +29,14 @@ class HttpManager
         $header = array("Content-Type:text/html;charset=UTF-8", "Connection: Keep-Alive");
         if ($gzip) {
             $data = gzencode($data, 9);
-            array_push($header,'Accept-Encoding:gzip');
-            array_push($header,'Content-Encoding:gzip');
+            array_push($header, 'Accept-Encoding:gzip');
+            array_push($header, 'Content-Encoding:gzip');
             curl_setopt($curl, CURLOPT_ENCODING, "gzip");
         }
-        if(!is_null($action))
-        {
-            array_push($header,"Gt-Action:".$action);
+        if (!is_null($action)) {
+            array_push($header, "Gt-Action:".$action);
         }
-        curl_setopt($curl, CURLOPT_HTTPHEADER,$header);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 
         $curl_version = curl_version();
@@ -46,8 +45,8 @@ class HttpManager
             curl_setopt($curl, CURLOPT_NOSIGNAL, 1);
         }
         // 通过代理访问接口需要在此处配置代理
-        curl_setopt ($curl, CURLOPT_PROXY, GTConfig::getHttpProxyIp());
-        curl_setopt($curl,CURLOPT_PROXYPORT,GTConfig::getHttpProxyPort());
+        curl_setopt($curl, CURLOPT_PROXY, GTConfig::getHttpProxyIp());
+        curl_setopt($curl, CURLOPT_PROXYPORT, GTConfig::getHttpProxyPort());
         curl_setopt($curl, CURLOPT_PROXYUSERNAME, GTConfig::getHttpProxyUserName());
         curl_setopt($curl, CURLOPT_PROXYPASSWORD, GTConfig::getHttpProxyPasswd());
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); // return don't print
@@ -74,7 +73,7 @@ class HttpManager
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($curl, CURLOPT_NOBODY, 1);
         $header = array("Content-Type:text/html;charset=UTF-8");
-        curl_setopt($curl, CURLOPT_HTTPHEADER,$header);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
 
         $curl_version = curl_version();
         if ($curl_version['version_number'] >= 462850) {
@@ -83,8 +82,8 @@ class HttpManager
         }
 
         //通过代理访问接口需要在此处配置代理
-        curl_setopt ($curl, CURLOPT_PROXY, GTConfig::getHttpProxyIp());
-        curl_setopt($curl,CURLOPT_PROXYPORT,GTConfig::getHttpProxyPort());
+        curl_setopt($curl, CURLOPT_PROXY, GTConfig::getHttpProxyIp());
+        curl_setopt($curl, CURLOPT_PROXYPORT, GTConfig::getHttpProxyPort());
         curl_setopt($curl, CURLOPT_PROXYUSERNAME, GTConfig::getHttpProxyUserName());
         curl_setopt($curl, CURLOPT_PROXYPASSWORD, GTConfig::getHttpProxyPasswd());
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); // return don't print
@@ -109,8 +108,7 @@ class HttpManager
      */
     public static function httpPostJson($url, $params, $gzip)
     {
-        if(!isset($params["version"]))
-        {
+        if (!isset($params["version"])) {
             $params["version"] = GTConfig::getSDKVersion();
         }
         $action = $params["action"];
@@ -122,7 +120,7 @@ class HttpManager
             $result = json_decode($resp, true);
             return $result;
         } catch (\Exception $e) {
-            throw new RequestException($params["requestId"],"httpPost:[".$url."] [" .$data." ] [ ".$result."]:",$e);
+            throw new RequestException($params["requestId"], "httpPost:[".$url."] [" .$data." ] [ ".$result."]:", $e);
         }
     }
 

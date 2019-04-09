@@ -11,14 +11,13 @@ use Wzhanjun\Igetui\Sdk\Igetui\Req\Transparent;
 
 class IGtBaseTemplate
 {
+    public $appId;
+    public $appkey;
+    public $pushInfo;
+    public $duration;
+    public $smsInfo;
 
-    var $appId;
-    var $appkey;
-    var $pushInfo;
-    var $duration;
-    var $smsInfo;
-
-    function get_transparent()
+    public function get_transparent()
     {
         $transparent = new Transparent();
         $transparent->set_templateId($this->getTemplateId());
@@ -29,7 +28,7 @@ class IGtBaseTemplate
         $transparent->set_pushInfo($this->get_pushInfo());
         $transparent->set_appId($this->appId);
         $transparent->set_appKey($this->appkey);
-        if($this->smsInfo != null){
+        if ($this->smsInfo != null) {
             $transparent->set_smsInfo($this->smsInfo);
         }
 
@@ -45,27 +44,25 @@ class IGtBaseTemplate
         return $transparent->SerializeToString();
     }
 
-    function getActionChain()
+    public function getActionChain()
     {
         return $list = array();
     }
 
-    function get_durcondition()
+    public function get_durcondition()
     {
-        if ($this->duration == null || $this->duration == '')
-        {
+        if ($this->duration == null || $this->duration == '') {
             return "";
         }
         return "duration=" . $this->duration;
     }
 
-    function get_duration()
+    public function get_duration()
     {
         return $this->duration;
     }
 
-    function set_duration($begin, $end)
-
+    public function set_duration($begin, $end)
     {
         date_default_timezone_set('asia/shanghai');
         /*  //for test
@@ -74,31 +71,32 @@ class IGtBaseTemplate
         */
         $ss = (string)strtotime($begin) * 1000;
         $e = (string)strtotime($end) * 1000;
-        if ($ss <= 0 || $e <= 0)
+        if ($ss <= 0 || $e <= 0) {
             throw new \Exception("DateFormat: yyyy-MM-dd HH:mm:ss");
-        if ($ss > $e)
+        }
+        if ($ss > $e) {
             throw new \Exception("startTime should be smaller than endTime");
+        }
 
         $this->duration = $ss . "-" . $e;
-
     }
 
-    function  get_transmissionContent()
+    public function get_transmissionContent()
     {
         return null;
     }
 
-    function  get_pushType()
+    public function get_pushType()
     {
         return null;
     }
 
-    function get_actionChain()
+    public function get_actionChain()
     {
         return null;
     }
 
-    function get_pushInfo()
+    public function get_pushInfo()
     {
         if ($this->pushInfo == null) {
             $this->pushInfo = new PushInfo();
@@ -109,9 +107,9 @@ class IGtBaseTemplate
         return $this->pushInfo;
     }
 
-    function setSmsInfo($smsMessage){
-
-        if($smsMessage == null){
+    public function setSmsInfo($smsMessage)
+    {
+        if ($smsMessage == null) {
             throw new \RuntimeException("smsInfo cannot be empty");
         } else {
             $smsTemplateId = $smsMessage->getSmsTemplateId();
@@ -127,26 +125,25 @@ class IGtBaseTemplate
                     $build->set_smsTemplateId($smsTemplateId);
                     $build->set_offlineSendtime($offlineSendtime);
                     if ($smsMessage->getisApplink()) {
-
                         if ($smsContent['url'] != null) {
                             throw new \RuntimeException("SmsContent cann not contains key about url");
                         }
                         $smsContentEntry = new SmsContentEntry();
                         $smsContentEntry->set_key("applinkIdentification");
                         $smsContentEntry->set_value("1");
-                        $build->set_smsContent("applinkIdentification",$smsContentEntry);
+                        $build->set_smsContent("applinkIdentification", $smsContentEntry);
                         $payload = $smsMessage->getPayload();
 
                         if ($payload != null && !empty($payload)) {
                             $smsContentEntry = new SmsContentEntry();
                             $smsContentEntry->set_key("url");
                             $smsContentEntry->set_value($smsMessage->getUrl() . "?n=" . $payload . "&p=");
-                            $build->set_smsContent("url",$smsContentEntry);
+                            $build->set_smsContent("url", $smsContentEntry);
                         } else {
                             $smsContentEntry = new SmsContentEntry();
                             $smsContentEntry->set_key("url");
                             $smsContentEntry->set_value($smsMessage->getUrl() . "?p=");
-                            $build->set_smsContent("url",$smsContentEntry);
+                            $build->set_smsContent("url", $smsContentEntry);
                         }
                     }
                     if ($smsContent != null) {
@@ -157,7 +154,7 @@ class IGtBaseTemplate
                                 $smsContentEntry = new SmsContentEntry();
                                 $smsContentEntry->set_key($key);
                                 $smsContentEntry->set_value($value);
-                                $build->set_smsContent($key,$smsContentEntry);
+                                $build->set_smsContent($key, $smsContentEntry);
                             }
                         }
                     }
@@ -166,63 +163,50 @@ class IGtBaseTemplate
                     }
                     $this->smsInfo = $build;
                 }
-            }
-            else {
+            } else {
                 throw new \RuntimeException("smsTemplateId cannot be empty");
             }
-
         }
-
-
     }
-    function set_pushInfo($actionLocKey, $badge, $message, $sound, $payload, $locKey, $locArgs, $launchImage, $contentAvailable = 0)
+    public function set_pushInfo($actionLocKey, $badge, $message, $sound, $payload, $locKey, $locArgs, $launchImage, $contentAvailable = 0)
     {
         $apn = new IGtAPNPayload();
 
         $alertMsg = new DictionaryAlertMsg();
-        if ($actionLocKey != null && $actionLocKey != '')
-        {
+        if ($actionLocKey != null && $actionLocKey != '') {
             $alertMsg->actionLocKey = $actionLocKey;
         }
-        if ($message != null && $message != '')
-        {
+        if ($message != null && $message != '') {
             $alertMsg->body = $message;
         }
-        if ($locKey != null && $locKey != '')
-        {
+        if ($locKey != null && $locKey != '') {
             $alertMsg->locKey = $locKey;
         }
-        if ($locArgs != null && $locArgs != '')
-        {
+        if ($locArgs != null && $locArgs != '') {
             array_push($alertMsg->locArgs, $locArgs);
         }
 
-        if ($launchImage != null && $launchImage != '')
-        {
+        if ($launchImage != null && $launchImage != '') {
             $alertMsg->launchImage = $launchImage;
         }
         $apn->alertMsg = $alertMsg;
 
-        if ($badge != null )
-        {
+        if ($badge != null) {
             $apn->badge = $badge;
         }
-        if ($sound != null && $sound != '')
-        {
+        if ($sound != null && $sound != '') {
             $apn->sound = $sound;
         }
-        if ($contentAvailable != null )
-        {
+        if ($contentAvailable != null) {
             $apn->contentAvailable = $contentAvailable;
         }
-        if ($payload != null && $payload != '')
-        {
+        if ($payload != null && $payload != '') {
             $apn->add_customMsg("payload", $payload);
         }
         $this->set_apnInfo($apn);
     }
 
-    function set_apnInfo($payload)
+    public function set_apnInfo($payload)
     {
         if ($payload == null) {
             return;
@@ -240,17 +224,17 @@ class IGtBaseTemplate
         $pushInfo->set_invalidAPN(false);
     }
 
-    function  set_appId($appId)
+    public function set_appId($appId)
     {
         $this->appId = $appId;
     }
 
-    function  set_appkey($appkey)
+    public function set_appkey($appkey)
     {
         $this->appkey = $appkey;
     }
 
-    function abslength($str)
+    public function abslength($str)
     {
         if (empty($str)) {
             return 0;
@@ -263,27 +247,27 @@ class IGtBaseTemplate
         }
     }
 
-    function getTemplateId() {
-        if($this instanceof IGtNotificationTemplate) {
+    public function getTemplateId()
+    {
+        if ($this instanceof IGtNotificationTemplate) {
             return 0;
         }
-        if($this instanceof IGtLinkTemplate) {
+        if ($this instanceof IGtLinkTemplate) {
             return 1;
         }
-        if($this instanceof IGtNotyPopLoadTemplate) {
+        if ($this instanceof IGtNotyPopLoadTemplate) {
             return 2;
         }
-        if($this instanceof  IGtTransmissionTemplate) {
+        if ($this instanceof  IGtTransmissionTemplate) {
             return 4;
         }
-        if($this instanceof IGtAPNTemplate) {
+        if ($this instanceof IGtAPNTemplate) {
             return 5;
         }
 
-        if($this instanceof IGtStartActivityTemplate) {
+        if ($this instanceof IGtStartActivityTemplate) {
             return 7;
         }
         return -1;
     }
-
 }

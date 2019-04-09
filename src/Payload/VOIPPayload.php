@@ -4,17 +4,16 @@ namespace Wzhanjun\Igetui\Sdk\Payload;
 
 class VOIPPayload
 {
-
-    var $voIPPayload;
+    public $voIPPayload;
 
     public function get_payload()
     {
         $payload = $this->voIPPayload;
-        if($payload == null || empty($payload)){
+        if ($payload == null || empty($payload)) {
             throw new \RuntimeException("payload cannot be empty");
         }
         $params = array();
-        if($payload != null){
+        if ($payload != null) {
             $params["payload"] = $payload;
         }
         $params["isVoIP"] = 1;
@@ -25,5 +24,4 @@ class VOIPPayload
     {
         $this->voIPPayload = $voIPPayload;
     }
-
 }

@@ -6,7 +6,7 @@ use Wzhanjun\Igetui\Sdk\Protobuf\PBMessage;
 
 class SmsContentEntry extends PBMessage
 {
-    var $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;
+    public $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;
 
     public function __construct($reader=null)
     {
@@ -16,19 +16,19 @@ class SmsContentEntry extends PBMessage
         $this->fields["2"] = "PBString";
         $this->values["2"] = "";
     }
-    function key()
+    public function key()
     {
         return $this->_get_value("1");
     }
-    function set_key($value)
+    public function set_key($value)
     {
         return $this->_set_value("1", $value);
     }
-    function value()
+    public function value()
     {
         return $this->_get_value("2");
     }
-    function set_value($value)
+    public function set_value($value)
     {
         return $this->_set_value("2", $value);
     }

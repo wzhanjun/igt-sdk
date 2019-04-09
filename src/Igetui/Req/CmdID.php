@@ -6,7 +6,6 @@ use Wzhanjun\Igetui\Sdk\Protobuf\Type\PBEnum;
 
 class CmdID extends PBEnum
 {
-
     const GTHEARDBT  = 0;
     const GTAUTH  = 1;
     const GTAUTH_RESULT  = 2;
@@ -26,5 +25,4 @@ class CmdID extends PBEnum
     const STOPBATCHTASK  = 16;
     const STOPBATCHTASKRESULT  = 17;
     const PUSHMMPSINGLEBATCH  = 18;
-
 }

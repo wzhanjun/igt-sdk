@@ -2,41 +2,42 @@
 
 namespace Wzhanjun\Igetui\Sdk\Igetui\Template\Notify;
 
-class IGtNotify {
+class IGtNotify
+{
 
     /**
      * 通知标题
      * @var
      */
-    var $title;
+    public $title;
 
     /**
      * 通知内容
      * @var
      */
-    var $content;
+    public $content;
 
     /**
      * 通知内容中携带的透传内容
      * @var
      */
-    var $payload;
+    public $payload;
 
     /**
      * 通知内容带url
      */
-    var $url;
+    public $url;
 
 
     /**
      * 通知内容带intent
      */
-    var $intent;
+    public $intent;
 
     /**
      * 指定通知中携带的类型
      */
-    var $type;
+    public $type;
 
     /**
      * @return mixed

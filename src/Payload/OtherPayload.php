@@ -4,5 +4,5 @@ namespace Wzhanjun\Igetui\Sdk\Payload;
 
 interface OtherPayload
 {
-    function get_payload();
+    public function get_payload();
 }

@@ -2,7 +2,8 @@
 
 namespace Wzhanjun\Igetui\Sdk\Igetui\Utils;
 
-class AppConditions {
+class AppConditions
+{
 
     //手机类型
     const PHONE_TYPE = "phoneType";
@@ -12,11 +13,11 @@ class AppConditions {
     const TAG = "tag";
 
     //条件
-    var $condition = array();
+    public $condition = array();
 
-    function __call ($name, $args )
+    public function __call($name, $args)
     {
-        if($name=='addCondition') {
+        if ($name=='addCondition') {
             switch (count($args)) {
                 case 2:
                     return call_user_func_array(array($this, 'addCondition2'), $args);
@@ -26,7 +27,8 @@ class AppConditions {
         }
     }
 
-    function addCondition3($key, $values, $optType=0) {
+    public function addCondition3($key, $values, $optType=0)
+    {
         $item = array();
         $item["key"] = $key;
         $item["values"] = $values;
@@ -34,11 +36,13 @@ class AppConditions {
         $this -> condition[] = $item;
         return $this;
     }
-    function addCondition2($key, $values) {
+    public function addCondition2($key, $values)
+    {
         return $this->addCondition3($key, $values, 0);
     }
 
-    function getCondition() {
+    public function getCondition()
+    {
         return $this->condition;
     }
 }

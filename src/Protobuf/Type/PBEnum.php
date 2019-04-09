@@ -6,7 +6,7 @@ use Wzhanjun\Igetui\Sdk\Protobuf\PBMessage;
 
 class PBEnum extends PBScalar
 {
-    var $wired_type = PBMessage::WIRED_VARINT;
+    public $wired_type = PBMessage::WIRED_VARINT;
 
     /**
      * Parses the message for this type
@@ -25,8 +25,7 @@ class PBEnum extends PBScalar
     {
         $string = '';
 
-        if ($rec > -1)
-        {
+        if ($rec > -1) {
             $string .= $this->base128->set_value($rec << 3 | $this->wired_type);
         }
 

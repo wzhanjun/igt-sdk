@@ -2,11 +2,12 @@
 
 namespace Wzhanjun\Igetui\Sdk\Igetui;
 
-class SimpleAlertMsg implements ApnMsg {
+class SimpleAlertMsg implements ApnMsg
+{
+    public $alertMsg;
 
-    var $alertMsg;
-
-    public function get_alertMsg() {
+    public function get_alertMsg()
+    {
         return $this->alertMsg;
     }
 }

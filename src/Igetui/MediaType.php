@@ -9,5 +9,4 @@ class MediaType
     const pic = 1;
     const audio = 2;
     const video = 3;
-
 }

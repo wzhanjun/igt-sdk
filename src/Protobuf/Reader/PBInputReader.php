@@ -47,5 +47,5 @@ abstract class PBInputReader
      * Getting the next varint as decimal number
      * @return varint
      */
-    public abstract function next();
+    abstract public function next();
 }
